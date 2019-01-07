@@ -14,27 +14,20 @@ import pandas as pd
 from bokeh.embed import components 
 
 @app.route('/')
+def start():
+	return render_template('start.html')
+
+@app.route('/action_page.php')
+
+
 def index():
-	#return 'Hello'
-	
 	code = request.args.get("code")
 	if code == None:
 		code = "AAPL"
 
-	'''ticker = TextInput(value="GOOGL", title="Ticker Symbol:")
-	show(widgetbox(ticker))
-	
-	def func(attrname, old, new):
-		tick = ticker.value
-	    
-
-	ticker.on_change('value', func)'''
 	script,div = make_plot(code)
 
 	return render_template('index.html', script=script, div=div)
-
-
-
 def make_plot(code):
 	url = "https://www.quandl.com/api/v3/datasets/WIKI/"+code+"/data.csv?start_date=2013-02-01&end_date=2013-02-28&api_key=nuEqV7LoZyAD2PBtKLWQ"
 	data = requests.get(url)
@@ -52,9 +45,6 @@ def make_plot(code):
 	script, div = components(p)
 	return script,div
 
-'''@app.route('/about')
-def about():
-  return render_template('about.html')'''
 
 if __name__ == '__main__':
 	port = int(os.environ.get("PORT", 5000))
