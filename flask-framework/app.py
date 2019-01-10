@@ -29,7 +29,7 @@ def index():
 
 	return render_template('index.html', script=script, div=div)
 def make_plot(code):
-	url = "https://www.quandl.com/api/v3/datasets/WIKI/"+code+"/data.csv?start_date=2013-02-01&end_date=2013-02-28&api_key=nuEqV7LoZyAD2PBtKLWQ"
+	url = "https://www.quandl.com/api/v3/datasets/WIKI/"+code+"/data.csv?start_date=2013-02-01&end_date=2013-02-28&api_key=XXXXXX"
 	data = requests.get(url)
 	df = pd.read_csv(io.StringIO(data.text))   
 	df.Date = pd.to_datetime(df.Date)
